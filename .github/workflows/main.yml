@@ -1,19 +1,19 @@
-name: CI/CD
+name: Build and Publish
 
 on:
   push:
     branches:
-      - master
+      - main # 替换为你的主分支名称
 
 jobs:
-  build-and-publish:
-    runs-on: macos-latest
+  build_and_publish:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 14
@@ -24,5 +24,7 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Test
-        run: npm test
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: npm publish

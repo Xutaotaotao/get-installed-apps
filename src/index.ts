@@ -1,7 +1,7 @@
 import {getInstalledApps as macGetInstalledApps} from './mac'
 import {getInstalledApps as winGetInstalledApps} from './win'
 
-export function getInstalledApps() {
+export default function getInstalledApps() {
   if (process.platform === 'darwin') {
     return macGetInstalledApps()
   } else if (process.platform === 'win32') {
