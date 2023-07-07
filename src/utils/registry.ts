@@ -107,7 +107,8 @@ function mkErrorMsg(registryCommand, code, output) {
   let stderr = output['stderr'].trim();
 
   let msg = util.format("%s command exited with code %d:\n%s\n%s", registryCommand, code, stdout, stderr);
-  return new ProcessUncleanExitError(msg, code);
+  return null
+  // return new ProcessUncleanExitError(msg, code);
 }
 
 
@@ -988,4 +989,3 @@ Registry.prototype.valueExists = function valueExists(name, cb) {
 
   return this;
 };
-
