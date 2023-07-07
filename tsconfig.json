@@ -4,10 +4,6 @@
     "module": "commonjs",
     "outDir": "dist"
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*.ts", "src/utils/registry.ts"],
+  "exclude": ["node_modules"]
 }
