@@ -3,7 +3,7 @@ name: Build and Publish
 on:
   push:
     branches:
-      - main # 替换为你的主分支名称
+      - master
 
 jobs:
   build_and_publish:
