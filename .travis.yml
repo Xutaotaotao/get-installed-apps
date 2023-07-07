@@ -8,7 +8,6 @@ os:
  - linux
 
 stages:
- - test
  - name: deploy
 
 jobs:
