@@ -7,6 +7,21 @@ import {
 } from "../src/mac";
 import { expect } from "chai";
 
+describe("getInstalledApps", () => {
+  it("should return a promise", () => {
+    getInstalledApps().then(apps => {
+      console.log(apps)
+    })
+    expect(getInstalledApps("/Applications")).to.be.a('promise')
+  });
+  it('should reject the promise if any error occurs', async () => {
+    try {
+      await getInstalledApps("abjdefghijklm");
+      expect.fail('The promise should have been rejected');
+    } catch (_error) {}
+  });
+});
+
 describe("getDirectoryContents", () => {
   it("should return some contents", () => {
     getDirectoryContents("/Applications").then((result) => {
@@ -62,17 +77,3 @@ describe("getAppData", () => {
   });
 });
 
-describe("getInstalledApps", () => {
-  it("should return a promise", () => {
-    getInstalledApps().then(res => {
-      console.log(res)
-    })
-    expect(getInstalledApps("/Applications")).to.be.a('promise')
-  });
-  it('should reject the promise if any error occurs', async () => {
-    try {
-      await getInstalledApps("abjdefghijklm");
-      expect.fail('The promise should have been rejected');
-    } catch (_error) {}
-  });
-});
