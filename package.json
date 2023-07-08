@@ -1,6 +1,6 @@
 {
   "name": "get-installed-apps",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Get installed apps by node",
   "homepage": "https://github.com/Xutaotaotao/get-installed-apps.git",
   "main": "dist/index.js",

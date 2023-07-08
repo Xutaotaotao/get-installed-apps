@@ -64,6 +64,9 @@ describe("getAppData", () => {
 
 describe("getInstalledApps", () => {
   it("should return a promise", () => {
+    getInstalledApps().then(res => {
+      console.log(res)
+    })
     expect(getInstalledApps("/Applications")).to.be.a('promise')
   });
   it('should reject the promise if any error occurs', async () => {

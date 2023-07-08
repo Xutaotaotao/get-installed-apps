@@ -104,7 +104,9 @@ export function getAppData(singleAppFileInfo: Array<any>) {
       .filter((i: any) => i)
       .forEach((o: any) => {
         let appKeyVal = getKeyVal(o);
-        appData[appKeyVal.key] = appKeyVal.value;
+        if (appKeyVal.value) {
+          appData[appKeyVal.key] = appKeyVal.value;
+        }
         if (o.includes("kMDItemDisplayName")) {
           appData.appName = appKeyVal.value;
         }

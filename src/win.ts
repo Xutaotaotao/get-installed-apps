@@ -96,7 +96,9 @@ export function getAppData(appKey) {
       appKey.values((e: any, items: any) => {
         if (items) {
           for (var i = 0; i < items.length; i++) {
-            app[items[i].name] = items[i].value
+            if (items[i].value) {
+              app[items[i].name] = items[i].value
+            }
             if (items[i].name === "DisplayName") {
               app.appName = items[i].value;
             }
