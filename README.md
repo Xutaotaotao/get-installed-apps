@@ -54,9 +54,9 @@ getWinInstalledApps().then(apps => {
 
 Return an array.
 
-- macOS
-
 This is the return value for Visual Studio Code,the properties appName, appIdentifier, appInstallDate, and appVersion are overridden.
+
+- macOS
 
 ```
   [{
@@ -97,6 +97,44 @@ This is the return value for Visual Studio Code,the properties appName, appIdent
     appVersion: '1.79.0'
   }],
 ```
+- Windows
+```
+[
+  {
+    appIdentifier: '{771FD6B0-FA20-440A-A002-3B3BAC16DC50}_is1',
+    'Inno Setup: Setup Version': '6.0.5 (u)',
+    'Inno Setup: App Path': 'D:\\software\\Microsoft VS Code',
+    InstallLocation: 'D:\\software\\Microsoft VS Code\\',
+    'Inno Setup: Icon Group': 'Visual Studio Code',
+    'Inno Setup: User': 'CYJ',
+    'Inno Setup: Selected Tasks': 'associatewithfiles,addtopath,runcode',
+    'Inno Setup: Deselected Tasks': 'desktopicon,addcontextmenufiles,addcontextmenufolders',
+    'Inno Setup: Language': 'simplifiedChinese',
+    DisplayName: 'Microsoft Visual Studio Code (User)',
+    appName: 'Microsoft Visual Studio Code (User)',
+    DisplayIcon: 'D:\\software\\Microsoft VS Code\\Code.exe',
+    UninstallString: '"D:\\software\\Microsoft VS Code\\unins000.exe"',
+    QuietUninstallString: '"D:\\software\\Microsoft VS Code\\unins000.exe" /SILENT',
+    DisplayVersion: '1.80.0',
+    appVersion: '1.80.0',
+    Publisher: 'Microsoft Corporation',
+    appPublisher: 'Microsoft Corporation',
+    URLInfoAbout: 'https://code.visualstudio.com/',
+    HelpLink: 'https://code.visualstudio.com/',
+    URLUpdateInfo: 'https://code.visualstudio.com/',
+    NoModify: '0x1',
+    NoRepair: '0x1',
+    InstallDate: '20230709',
+    appInstallDate: '20230709',
+    MajorVersion: '0x1',
+    MinorVersion: '0x50',
+    VersionMajor: '0x1',
+    VersionMinor: '0x50',
+    EstimatedSize: '0x55f14'
+  }
+]
+```
+
 
 # 🤔 How it works
 
@@ -113,6 +151,6 @@ cd get-installed-apps
 
 npm i
 
-npm run test
+npm start
 
 ```
