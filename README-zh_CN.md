@@ -1,13 +1,12 @@
 # Get Insatlled Apps
 
-Get installed app using Node.js, supporting Windows and macOS.
+通过Node.js 获取电脑安装的软件，支持Windows和Mac两个平台。
 
-# 👨‍💻 Install
+# 👨‍💻 安装
 
 `npm install get-installed-apps`
 
-# 🔌 Usage
-
+# 🔌 用法
 ES6 Module 
 
 ```
@@ -27,8 +26,7 @@ getInstalledApps().then(apps => {
 })
 ```
 
-If you want to use macOS-specific methods separately, you can do it like this.
-
+如果你只想在mac平台上使用，可以这么做：
 
 ```
 import {getMacInstalledApps} from 'get-installed-apps'
@@ -38,7 +36,8 @@ getMacInstalledApps().then(apps => {
 })
 ```
 
-If you want to use windows-specific methods separately, you can do it like this.
+如果你只想在windows平台上使用，可以这么做：
+
 
 ```
 import {getWinInstalledApps} from 'get-installed-apps'
@@ -47,12 +46,11 @@ getWinInstalledApps().then(apps => {
   console.log(apps)
 })
 ```
+# ✅ 输出
 
-# ✅ OUTPUT
+返回一个数组。
 
-Return an array.
-
-This is the return value for Visual Studio Code,the properties appName, appIdentifier, appInstallDate, and appVersion are overridden.
+下面是一个vscode的软件信息返回值， appName, appIdentifier, appInstallDate, appVersion这四个值是新的属性，主要保证双端统一。
 
 - macOS
 
@@ -132,16 +130,14 @@ This is the return value for Visual Studio Code,the properties appName, appIdent
   }
 ]
 ```
-
-
-# 🤔 How it works
-
+# 🤔 原理
 - macOS
-Retrieve the software file directory under 'Applications', use 'mdls' to fetch relevant information about the software files, and then extract the corresponding information.
-- Windows
-Retrieve software information by reading data from the registry.
+通过获取Applications文件夹下所有的文件，然后通过mdls获取文件的属性，然后解析相应的信息，形成结构的app信息的对象。
 
-# 🛠 Development
+- Windows
+主要是读取注册表的数据，然后解析相应的信息，形成结构的app信息的对象。
+
+# 🛠 本地开发
 ```
 git clone https://github.com/Xutaotaotao/get-installed-apps.git
 
