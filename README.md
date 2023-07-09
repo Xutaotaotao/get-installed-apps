@@ -1,3 +1,4 @@
+English | [简体中文](./README-zh_CN.md)
 # Get Insatlled Apps
 
 Get installed app using Node.js, supporting Windows and macOS.

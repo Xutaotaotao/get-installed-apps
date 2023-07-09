@@ -1,3 +1,5 @@
+简体中文 | [English](./README.md)
+
 # Get Insatlled Apps
 
 通过Node.js 获取电脑安装的软件，支持Windows和Mac两个平台。
