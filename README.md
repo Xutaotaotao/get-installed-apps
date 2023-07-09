@@ -1,4 +1,4 @@
-English | [简体中文](./README-zh_CN.md)
+English | [简体中文](https://github.com/Xutaotaotao/get-installed-apps/blob/master/README-zh_CN.md)
 # Get Insatlled Apps
 
 Get installed app using Node.js, supporting Windows and macOS.

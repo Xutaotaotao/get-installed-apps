@@ -1,4 +1,4 @@
-简体中文 | [English](./README.md)
+简体中文 | [English](https://github.com/Xutaotaotao/get-installed-apps/blob/master/README.md)
 
 # Get Insatlled Apps
 
