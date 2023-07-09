@@ -1,6 +1,6 @@
 {
   "name": "get-installed-apps",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Get installed app using Node.js, supporting Windows and macOS.",
   "homepage": "https://github.com/Xutaotaotao/get-installed-apps.git",
   "main": "dist/index.js",
@@ -15,9 +15,9 @@
   ],
   "scripts": {
     "build": "tsc",
+    "start": "node dist/index.js",
     "test": "nyc mocha --require ts-node/register 'test/**/*.spec.ts'",
-    "coverage": "nyc report --reporter=lcov",
-    "start": "npm run build && node example.js"
+    "coverage": "nyc report --reporter=lcov"
   },
   "author": "",
   "license": "ISC",
