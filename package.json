@@ -1,6 +1,6 @@
 {
   "name": "get-installed-apps",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Get installed app using Node.js, supporting Windows and macOS.",
   "homepage": "https://github.com/Xutaotaotao/get-installed-apps.git",
   "main": "dist/index.js",
