@@ -1,52 +1,38 @@
-English | [简体中文](https://github.com/Xutaotaotao/get-installed-apps/blob/master/README-zh_CN.md)
+English | [简体中文](https://github.com/Jarvie789/get-installed-apps-base/blob/master/README-zh_CN.md)
 # Get Insatlled Apps
 
 Get installed app using Node.js, supporting Windows and macOS.
 
 # 👨‍💻 Install
 
-`npm install get-installed-apps`
+`npm install get-installed-apps-base`
 
 # 🔌 Usage
 
 ES6 Module 
 
 ```
-import {getInstalledApps} from 'get-installed-apps'
+import { getMacInstalledApps, getWinInstalledApps } from 'get-installed-apps'
 
-getInstalledApps().then(apps => {
-  console.log(apps)
-})
+if (process.platform === 'darwin') {
+  getMacInstalledApps().then(apps => {
+    console.log(apps)
+  })
+}
+
+if (process.platform === 'win32') {
+  getWinInstalledApps().then(apps => {
+    console.log(apps)
+  })
+}
 ```
 
 CommonJS
 
 ```
 const {getInstalledApps} = require('get-installed-apps')
-getInstalledApps().then(apps => {
-  console.log(apps)
-})
-```
 
-If you want to use macOS-specific methods separately, you can do it like this.
-
-
-```
-import {getMacInstalledApps} from 'get-installed-apps'
-
-getMacInstalledApps().then(apps => {
-  console.log(apps)
-})
-```
-
-If you want to use windows-specific methods separately, you can do it like this.
-
-```
-import {getWinInstalledApps} from 'get-installed-apps'
-
-getWinInstalledApps().then(apps => {
-  console.log(apps)
-})
+...
 ```
 
 # ✅ OUTPUT

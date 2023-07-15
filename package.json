@@ -1,8 +1,8 @@
 {
   "name": "get-installed-apps-base",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Get installed app using Node.js, supporting Windows and macOS.",
-  "homepage": "https://github.com/Xutaotaotao/get-installed-apps-base.git",
+  "homepage": "https://github.com/Jarvie789/get-installed-apps-base.git",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "keywords": [
