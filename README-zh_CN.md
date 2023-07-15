@@ -6,47 +6,34 @@
 
 # 👨‍💻 安装
 
-`npm install get-installed-apps`
+`npm install get-installed-apps-base`
 
 # 🔌 用法
 ES6 Module 
 
 ```
-import {getInstalledApps} from 'get-installed-apps'
+import { getMacInstalledApps, getWinInstalledApps } from 'get-installed-apps'
 
-getInstalledApps().then(apps => {
-  console.log(apps)
-})
+if (process.platform === 'darwin') {
+  getMacInstalledApps().then(apps => {
+    console.log(apps)
+  })
+}
+
+if (process.platform === 'win32') {
+  getWinInstalledApps().then(apps => {
+    console.log(apps)
+  })
+}
+
 ```
 
 CommonJS
 
 ```
-const {getInstalledApps} = require('get-installed-apps')
-getInstalledApps().then(apps => {
-  console.log(apps)
-})
-```
+const {getMacInstalledApps, getWinInstalledApps} = require('get-installed-apps')
 
-如果你只想在mac平台上使用，可以这么做：
-
-```
-import {getMacInstalledApps} from 'get-installed-apps'
-
-getMacInstalledApps().then(apps => {
-  console.log(apps)
-})
-```
-
-如果你只想在windows平台上使用，可以这么做：
-
-
-```
-import {getWinInstalledApps} from 'get-installed-apps'
-
-getWinInstalledApps().then(apps => {
-  console.log(apps)
-})
+...
 ```
 # ✅ 输出
 
@@ -141,9 +128,9 @@ getWinInstalledApps().then(apps => {
 
 # 🛠 本地开发
 ```
-git clone https://github.com/Xutaotaotao/get-installed-apps.git
+git clone https://github.com/Jarvie789/get-installed-apps-base.git
 
-cd get-installed-apps
+cd get-installed-apps-base
 
 npm i
 

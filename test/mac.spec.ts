@@ -9,7 +9,7 @@ import { expect } from "chai";
 
 describe("getInstalledApps", () => {
   it("should return a promise", () => {
-    getInstalledApps().then(apps => {
+    getInstalledApps("/Applications").then(apps => {
       console.log(apps)
     })
     expect(getInstalledApps("/Applications")).to.be.a('promise')
