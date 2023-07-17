@@ -19,7 +19,9 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "nyc mocha --require ts-node/register 'test/**/*.spec.ts'",
-    "coverage": "nyc report --reporter=lcov"
+    "coverage": "nyc report --reporter=lcov",
+    "example": "node example.js",
+    "dev": "npm run start && npm run example"
   },
   "author": "",
   "license": "ISC",
