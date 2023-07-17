@@ -21,7 +21,8 @@
     "test": "nyc mocha --require ts-node/register 'test/**/*.spec.ts'",
     "coverage": "nyc report --reporter=lcov",
     "example": "node example.js",
-    "dev": "npm run start && npm run example"
+    "dev": "npm run start && npm run example",
+    "trypublish": "npm publish || true"
   },
   "author": "",
   "license": "ISC",
