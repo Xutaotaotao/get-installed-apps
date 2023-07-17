@@ -1,6 +1,6 @@
 import { exec, spawnSync } from "child_process";
 
-export function getInstalledApps(directory = "/Applications") {
+export function getInstalledApps(directory:string) {
   return new Promise(async (resolve, reject) => {
     try {
       const directoryContents = await getDirectoryContents(directory);

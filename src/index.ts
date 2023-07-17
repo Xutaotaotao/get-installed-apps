@@ -3,7 +3,7 @@ import {getInstalledApps as winGetInstalledApps} from './win'
 
 export function getInstalledApps() {
   if (process.platform === 'darwin') {
-    return macGetInstalledApps()
+    return macGetInstalledApps("/Applications")
   } else if (process.platform === 'win32') {
     return winGetInstalledApps()
   } else {
@@ -13,8 +13,8 @@ export function getInstalledApps() {
   }
 }
 
-export function getMacInstalledApps () {
-  return macGetInstalledApps()
+export function getMacInstalledApps (directory = "/Applications") {
+  return macGetInstalledApps(directory)
 }
 
 export function getWinInstalledApps () {
