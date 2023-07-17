@@ -39,6 +39,8 @@ getMacInstalledApps().then(apps => {
 })
 ```
 
+`getMacInstalledApps` has a optional parameter directory, defalut is '/Applications',you can set it what you need.
+
 If you want to use windows-specific methods separately, you can do it like this.
 
 ```

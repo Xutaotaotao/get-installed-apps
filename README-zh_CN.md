@@ -37,6 +37,7 @@ getMacInstalledApps().then(apps => {
   console.log(apps)
 })
 ```
+`getMacInstalledApps` 有一个可选参数directory, 默认是'/Applications',你如果还需要获取其他目录的app,可以自己设置。
 
 如果你只想在windows平台上使用，可以这么做：
 
