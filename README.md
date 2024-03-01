@@ -1,5 +1,16 @@
+<div align="center">
+  <p>
+    <img src="https://img.shields.io/badge/version-1.1.0-blue.svg" alt="Version 1.1.0"/>
+    <img src="https://img.shields.io/npm/dt/get-installed-apps" alt="downloads" />
+    <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="MIT License"/>
+    <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS-lightgrey.svg" alt="Platform: Windows | macOS"/>
+  </p>
+</div>
+
 English | [简体中文](https://github.com/Xutaotaotao/get-installed-apps/blob/master/README-zh_CN.md)
+
 # Get Insatlled Apps
+
 
 Get installed app using Node.js, supporting Windows and macOS.
 
