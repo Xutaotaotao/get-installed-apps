@@ -7,8 +7,11 @@
     <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS-lightgrey.svg" alt="Platform: Windows | macOS"/>
   </p>
 </div>
+<div align="center">
 
-English | [简体中文](https://github.com/Xutaotaotao/get-installed-apps/blob/master/README-zh_CN.md)
+  English | [简体中文](https://github.com/Xutaotaotao/get-installed-apps/blob/master/README-zh_CN.md)
+  
+</div>
 
 # Get Insatlled Apps
 
