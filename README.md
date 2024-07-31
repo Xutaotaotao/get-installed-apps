@@ -159,6 +159,12 @@ Retrieve the software file directory under 'Applications', use 'mdls' to fetch r
 - Windows
 Retrieve software information by reading data from the registry.
 
+# 📱 Contact me
+
+Use WeChat to contact me
+
+<img src="https://xutaotaotao.github.io/wx_qr.jpg" />
+
 # 🛠 Development
 ```
 git clone https://github.com/Xutaotaotao/get-installed-apps.git

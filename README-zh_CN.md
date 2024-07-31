@@ -155,6 +155,12 @@ getWinInstalledApps().then(apps => {
 - Windows
 主要是读取注册表的数据，然后解析相应的信息，形成结构的app信息的对象。
 
+# 📱 联系作者
+
+微信扫码联系我
+
+<img src="https://xutaotaotao.github.io/wx_qr.jpg" />
+
 # 🛠 本地开发
 ```
 git clone https://github.com/Xutaotaotao/get-installed-apps.git
