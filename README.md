@@ -163,7 +163,7 @@ Retrieve software information by reading data from the registry.
 
 Use WeChat to contact me
 
-<img src="https://xutaotaotao.github.io/wx_qr.jpeg" />
+<img src="https://xutaotaotao.github.io/wx_qr.jpeg" width="200"/>
 
 # 🛠 Development
 ```
