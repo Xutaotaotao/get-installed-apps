@@ -2,7 +2,9 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "outDir": "dist"
+    "outDir": "dist",
+    "declaration": true,       
+    "declarationMap": true,
   },
   "include": ["src/**/*.ts", "src/utils/registry.ts"],
   "exclude": ["node_modules"]
