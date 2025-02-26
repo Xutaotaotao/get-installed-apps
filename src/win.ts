@@ -1,122 +1,104 @@
-import { Registry } from "./utils/registry";
+import { HKEY, enumerateKeys, enumerateValues } from "registry-js";
 
-export function getInstalledApps() {
-  return new Promise(async (resolve, reject) => {
-    let HKLM_SOFTWARE_Microsoft: any = [];
-    let HKLM_SOFTWARE_Wow6432Node_Microsoft: any = [];
-    let HKCU_SOFTWARE_Microsoft: any = [];
-    let HKCU_SOFTWARE_Wow6432Node_Microsoft: any = [];
-    try {
-      HKLM_SOFTWARE_Microsoft = await getApps(
-        new Registry({
-          hive: Registry.HKLM,
-          key: "\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall",
-        })
-      );
-    } catch (err) {
-      console.error("HKLM_SOFTWARE_Microsoft err", err);
-    }
+// 定义应用信息类型
+export interface AppInfo {
+  appIdentifier: string;
+  appName?: string;
+  appVersion?: string;
+  appInstallDate?: string;
+  appPublisher?: string;
+  [key: string]: any;
+}
 
-    try {
-      HKLM_SOFTWARE_Wow6432Node_Microsoft = await getApps(
-        new Registry({
-          hive: Registry.HKLM,
-          key: "\\Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall",
-        })
-      );
-    } catch (err) {
-      console.error("HKLM_SOFTWARE_Wow6432Node_Microsoft err", err);
-    }
+// 需要查询的注册表路径配置
+const REGISTRY_PATHS = [
+  {
+    hive: HKEY.HKEY_LOCAL_MACHINE,
+    key: "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall",
+  },
+  {
+    hive: HKEY.HKEY_LOCAL_MACHINE,
+    key: "SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall",
+  },
+  {
+    hive: HKEY.HKEY_CURRENT_USER,
+    key: "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall",
+  },
+  {
+    hive: HKEY.HKEY_CURRENT_USER,
+    key: "SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall",
+  },
+];
 
-    try {
-      HKCU_SOFTWARE_Microsoft = await getApps(
-        new Registry({
-          hive: Registry.HKCU,
-          key: "\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall",
-        })
-      );
-    } catch (err) {
-      console.error("HKCU_SOFTWARE_Microsoft err", err);
-    }
-
-    try {
-      HKCU_SOFTWARE_Wow6432Node_Microsoft = await getApps(
-        new Registry({
-          hive: Registry.HKCU,
-          key: "\\Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall",
-        })
-      );
-    } catch (err) {
-      console.error("HKCU_SOFTWARE_Wow6432Node_Microsoft err", err);
-    }
-
-    resolve(
-      [
-        ...HKLM_SOFTWARE_Microsoft,
-        ...HKLM_SOFTWARE_Wow6432Node_Microsoft,
-        ...HKCU_SOFTWARE_Microsoft,
-        ...HKCU_SOFTWARE_Wow6432Node_Microsoft,
-      ].filter((o) => o.appName)
+export async function getInstalledApps(): Promise<AppInfo[]> {
+  try {
+    const results = await Promise.all(
+      REGISTRY_PATHS.map((path) => getApps(path.hive, path.key))
     );
-  });
+    return results.flat().filter((app) => app.appName);
+  } catch (error) {
+    console.error("Error fetching installed apps:", error);
+    return [];
+  }
 }
 
-export function getApps(regKey: any) {
-  return new Promise((resolve) => {
-    try {
-      regKey.keys(function (err: Error, key: any) {
-        if (err) {
-          console.error(err);
-          resolve([]);
-        }
-        if (key) {
-          const getAppItems = key.map((o: any) => {
-            return getAppData(o);
-          });
-          Promise.all(getAppItems).then((res) => {
-            resolve(res);
-          });
-        } else {
-          resolve([]);
-        }
-      });
-    } catch (err) {
-      console.error("getAppItems err", err);
-      resolve([]);
-    }
-  });
+export async function isAppInstalled(name: string): Promise<boolean> {
+  const apps = await getInstalledApps();
+  return apps.some((app) => app.appName === name);
 }
 
-export function getAppData(appKey) {
-  return new Promise((resolve) => {
-    let app: any = {};
-    try {
-      let keyArr = appKey.key.split("\\");
-      app.appIdentifier = keyArr[keyArr.length - 1];
-      appKey.values((e: any, items: any) => {
-        if (items) {
-          for (var i = 0; i < items.length; i++) {
-            if (items[i].value) {
-              app[items[i].name] = items[i].value
-            }
-            if (items[i].name === "DisplayName") {
-              app.appName = items[i].value;
-            }
-            if (items[i].name === "DisplayVersion") {
-              app.appVersion = items[i].value;
-            }
-            if (items[i].name === "InstallDate") {
-              app.appInstallDate = items[i].value;
-            }
-            if (items[i].name === "Publisher") {
-              app.appPublisher = items[i].value;
-            }
-          }
-        }
-        resolve(app);
-      });
-    } catch (err) {
-      resolve(app);
+async function getApps(hive: HKEY, keyPath: string): Promise<AppInfo[]> {
+  try {
+    const subKeys = enumerateKeys(hive, keyPath);
+    const apps = await Promise.all(
+      subKeys.map((subKey) => getAppData(hive, `${keyPath}\\${subKey}`))
+    );
+
+    return apps.filter((app) => app.appName);
+  } catch (error) {
+    console.error(`Error reading registry path ${keyPath}:`, error);
+    return [];
+  }
+}
+
+async function getAppData(hive: HKEY, keyPath: string): Promise<AppInfo> {
+  const app: AppInfo = {
+    appIdentifier: keyPath.split("\\").pop() || "",
+  };
+
+  try {
+    const values = enumerateValues(hive, keyPath);
+
+    for (const value of values) {
+      if (!value) {
+        continue;
+      }
+      switch (value.name) {
+        case "DisplayName":
+          app.appName = String(value.data);
+          break;
+        case "DisplayVersion":
+          app.appVersion = String(value.data);
+          break;
+        case "InstallDate":
+          app.appInstallDate = String(value.data);
+          break;
+        case "Publisher":
+          app.appPublisher = String(value.data);
+          break;
+      }
+      // 保留所有原始值
+      app[value.name] = String(value.data);
     }
-  });
+  } catch (error) {
+    const values = enumerateValues(hive, keyPath);
+    console.error(
+      `Error reading app data from ${keyPath}:`,
+      error,
+      `Values`,
+      values
+    );
+  }
+
+  return app;
 }

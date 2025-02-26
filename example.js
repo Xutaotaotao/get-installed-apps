@@ -1,5 +1,8 @@
 const { getInstalledApps } = require("./dist/index");
 
-getInstalledApps().then(apps => {
-    console.log(apps)
-})
+console.time("test");
+getInstalledApps().then((apps) => {
+  console.log(apps);
+
+  console.timeEnd("test");
+});
