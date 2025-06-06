@@ -16,7 +16,9 @@
 # Get Insatlled Apps
 
 
-Get installed app using Node.js, supporting Windows and macOS.
+Get installed app using Node.js, supporting Windows and macOS. 
+
+MCP：https://github.com/Xutaotaotao/mcp-get-installed-apps
 
 # 👨‍💻 Install
 
