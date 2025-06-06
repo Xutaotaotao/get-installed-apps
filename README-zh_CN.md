@@ -19,6 +19,8 @@
 
 通过Node.js 获取电脑安装的软件，支持Windows和Mac两个平台。
 
+MCP：https://github.com/Xutaotaotao/mcp-get-installed-apps
+
 # 👨‍💻 安装
 
 `npm install get-installed-apps`
