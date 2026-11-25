@@ -18,3 +18,4 @@ export async function getInstalledApps() {
 export const getMacInstalledApps = getMacApps;
 export const getWinInstalledApps = getWinApps;
 export const getLinuxInstalledApps = getLinuxApps;
+export * from './types';

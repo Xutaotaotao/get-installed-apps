@@ -1,32 +1,31 @@
 <div align="center">
   <p>
     <img src="https://img.shields.io/badge/version-1.1.0-blue.svg" alt="Version 1.2.1"/>
-    <!-- <a href="https://github.com/jbrink90/get-installed-apps/actions/workflows/main.yml"><img src="https://github.com/jbrink90/get-installed-apps/actions/workflows/main.yml/badge.svg" alt="build status"></a> -->
-    <img src="https://img.shields.io/npm/dt/get-installed-apps" alt="downloads" />
+    <img src="https://img.shields.io/npm/dt/node-get-installed-apps" alt="downloads" />
     <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="MIT License"/>
     <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-success.svg" alt="Platform: Windows | macOS | Linux"/>
   </p>
 </div>
 <div align="center">
 
-简体中文 | [English](https://github.com/jbrink90/get-installed-apps/blob/master/README.md)
+简体中文 | [English](https://github.com/grayhatdevelopers/node-get-installed-apps/blob/master/README.md)
 
 </div>
 
-# Get Installed Apps (Linux 支持/发布)
+# Get Installed Apps
 
-该工具使用 Node.js 获取计算机上已安装的软件列表，并支持 Windows、Linux 和 Mac 平台。
+使用 Node.js 获取已安装的应用程序和软件包。支持 Windows、macOS 和 Linux。
 
 # 👨‍💻 安装
 
-`npm install get-installed-apps-linux`
+`npm install node-get-installed-apps`
 
-# 🔌 用法
+# 🔌 使用方法
 
-ES6 Module
+ES6 模块
 
-```
-import {getInstalledApps} from 'get-installed-apps-linux'
+```js
+import {getInstalledApps} from 'node-get-installed-apps'
 
 getInstalledApps().then(apps => {
   console.log(apps)
@@ -35,39 +34,39 @@ getInstalledApps().then(apps => {
 
 CommonJS
 
-```
-const {getInstalledApps} = require('get-installed-apps-linux')
+```js
+const {getInstalledApps} = require('node-get-installed-apps')
 getInstalledApps().then(apps => {
   console.log(apps)
 })
 ```
 
-如果你只想在 mac 平台上使用，可以这么做：
+如果您想单独使用 macOS 特定方法，可以这样做：
 
-```
-import {getMacInstalledApps} from 'get-installed-apps-linux'
+```js
+import {getMacInstalledApps} from 'node-get-installed-apps'
 
 getMacInstalledApps().then(apps => {
   console.log(apps)
 })
 ```
 
-`getMacInstalledApps` 有一个可选参数 directory, 默认是'/Applications',你如果还需要获取其他目录的 app,可以自己设置。
+`getMacInstalledApps` 有一个可选参数 directory，默认是 '/Applications'，您可以根据需要设置其他目录。
 
-如果你只想在 windows 平台上使用，可以这么做：
+如果您想单独使用 Windows 特定方法，可以这样做：
 
-```
-import {getWinInstalledApps} from 'get-installed-apps-linux'
+```js
+import {getWinInstalledApps} from 'node-get-installed-apps'
 
 getWinInstalledApps().then(apps => {
   console.log(apps)
 })
 ```
 
-对于特定于 Linux 的方法
+对于 Linux 特定方法：
 
-```
-import {getLinuxInstalledApps} from 'get-installed-apps-linux'
+```js
+import {getLinuxInstalledApps} from 'node-get-installed-apps'
 
 getLinuxInstalledApps().then(apps => {
   console.log(apps)
@@ -76,140 +75,128 @@ getLinuxInstalledApps().then(apps => {
 
 # ✅ 输出
 
-返回一个数组。
+返回一个应用程序或软件包数组及其识别属性。
 
-下面是一个 vscode 的软件信息返回值， appName, appIdentifier, appInstallDate, appVersion 这四个值是新的属性，主要保证双端统一。
+为了在所有操作系统之间标准化类型，本包返回以下结构的数据：
+```ts
+type ReturnData = {
+  appName: string;           // 应用程序名称
+  appIdentifier: string;     // 应用程序标识符
+  appVersion: string | null; // 应用程序版本
+  installPath?: string | null; // 安装路径
+  // 以上所有值根据检索数据使用的"方法"而有所不同
 
-- macOS
+  platform: string; // 应用程序所在的平台
+  method: string;   // 取决于检索信息的方法类型；在操作系统内会有所不同
 
-```
-  [{
-    _kMDItemDisplayNameWithExtensions: 'Visual Studio Code.app',
-    appName: 'Visual Studio Code',
-    kMDItemAppStoreCategory: '开发者工具',
-    kMDItemAppStoreCategoryType: 'public.app-category.developer-tools',
-    kMDItemCFBundleIdentifier: 'com.microsoft.VSCode',
-    appIdentifier: 'com.microsoft.VSCode',
-    kMDItemContentCreationDate: '2023-06-07 21:45:16 +0000',
-    kMDItemContentCreationDate_Ranking: '2023-06-07 00:00:00 +0000',
-    kMDItemContentModificationDate: '2023-06-07 21:45:16 +0000',
-    kMDItemContentType: 'com.apple.application-bundle',
-    kMDItemCopyright: 'Copyright',
-    kMDItemDateAdded: '2023-06-20 11:13:54 +0000',
-    appInstallDate: '2023-06-20 11:13:54 +0000',
-    kMDItemDisplayName: 'Visual Studio Code',
-    kMDItemDocumentIdentifier: '0',
-    kMDItemFSContentChangeDate: '2023-06-07 21:45:16 +0000',
-    kMDItemFSCreationDate: '2023-06-07 21:45:16 +0000',
-    kMDItemFSFinderFlags: '0',
-    kMDItemFSInvisible: '0',
-    kMDItemFSIsExtensionHidden: '1',
-    kMDItemFSLabel: '0',
-    kMDItemFSName: 'Visual Studio Code.app',
-    kMDItemFSNodeCount: '1',
-    kMDItemFSOwnerGroupID: '20',
-    kMDItemFSOwnerUserID: '501',
-    kMDItemFSSize: '544298942',
-    kMDItemInterestingDate_Ranking: '2023-07-06 00:00:00 +0000',
-    kMDItemKind: '应用程序',
-    kMDItemLastUsedDate: '2023-07-06 09:53:00 +0000',
-    kMDItemLastUsedDate_Ranking: '2023-07-06 00:00:00 +0000',
-    kMDItemLogicalSize: '544298942',
-    kMDItemPhysicalSize: '546988032',
-    kMDItemUseCount: '9',
-    kMDItemVersion: '1.79.0',
-    appVersion: '1.79.0'
-  }],
+  metadata: object; // "方法"返回的原始元数据
+}
 ```
 
-- Windows
+以下是针对 Visual Studio Code 的返回值示例，这些示例符合上述标准化的 `ReturnData` 结构：
 
-```
+## macOS
+
+```ts
 [
   {
-    appIdentifier: '{771FD6B0-FA20-440A-A002-3B3BAC16DC50}_is1',
-    'Inno Setup: Setup Version': '6.0.5 (u)',
-    'Inno Setup: App Path': 'D:\\software\\Microsoft VS Code',
-    InstallLocation: 'D:\\software\\Microsoft VS Code\\',
-    'Inno Setup: Icon Group': 'Visual Studio Code',
-    'Inno Setup: User': 'CYJ',
-    'Inno Setup: Selected Tasks': 'associatewithfiles,addtopath,runcode',
-    'Inno Setup: Deselected Tasks': 'desktopicon,addcontextmenufiles,addcontextmenufolders',
-    'Inno Setup: Language': 'simplifiedChinese',
-    DisplayName: 'Microsoft Visual Studio Code (User)',
-    appName: 'Microsoft Visual Studio Code (User)',
-    DisplayIcon: 'D:\\software\\Microsoft VS Code\\Code.exe',
-    UninstallString: '"D:\\software\\Microsoft VS Code\\unins000.exe"',
-    QuietUninstallString: '"D:\\software\\Microsoft VS Code\\unins000.exe" /SILENT',
-    DisplayVersion: '1.80.0',
-    appVersion: '1.80.0',
-    Publisher: 'Microsoft Corporation',
-    appPublisher: 'Microsoft Corporation',
-    URLInfoAbout: 'https://code.visualstudio.com/',
-    HelpLink: 'https://code.visualstudio.com/',
-    URLUpdateInfo: 'https://code.visualstudio.com/',
-    NoModify: '0x1',
-    NoRepair: '0x1',
-    InstallDate: '20230709',
-    appInstallDate: '20230709',
-    MajorVersion: '0x1',
-    MinorVersion: '0x50',
-    VersionMajor: '0x1',
-    VersionMinor: '0x50',
-    EstimatedSize: '0x55f14'
+    appName: "Visual Studio Code",
+    appIdentifier: "com.microsoft.VSCode",
+    appVersion: "1.79.0",
+    installPath: "/Applications/Visual Studio Code.app",
+    platform: "macOS",
+    method: "mdls",
+    metadata: {
+      _kMDItemDisplayNameWithExtensions: "Visual Studio Code.app",
+      kMDItemCFBundleIdentifier: "com.microsoft.VSCode",
+      kMDItemVersion: "1.79.0",
+      kMDItemKind: "应用程序",
+      kMDItemContentType: "com.apple.application-bundle",
+      kMDItemDateAdded: "2023-06-20 11:13:54 +0000",
+      kMDItemLastUsedDate: "2023-07-06 09:53:00 +0000",
+      kMDItemPhysicalSize: "546988032",
+      kMDItemUseCount: "9"
+    }
   }
 ]
 ```
 
-- Linux
+## Windows
 
-```
+```ts
 [
   {
-    name: 'fail2ban',
-    packageId: 'fail2ban',
-    version: '1.0.2-2',
-    type: 'dpkg',
-    architecture: 'all',
-    maintainer: 'Debian Python Team <team+python@tracker.debian.org>',
-    section: 'net',
-    description: 'ban hosts that cause multiple authentication errors',
-    installed_size: 2180096,
-    repository: null,
-    license: null,
-    install_date: null,
-    is_system_package: 0,
-    is_auto_installed: 0
+    appName: "Microsoft Visual Studio Code (User)",
+    appIdentifier: "{771FD6B0-FA20-440A-A002-3B3BAC16DC50}_is1",
+    appVersion: "1.80.0",
+    installPath: "D:\\software\\Microsoft VS Code\\",
+    platform: "Windows",
+    method: "registry",
+    metadata: {
+      DisplayName: "Microsoft Visual Studio Code (User)",
+      DisplayVersion: "1.80.0",
+      Publisher: "Microsoft Corporation",
+      InstallLocation: "D:\\software\\Microsoft VS Code\\",
+      DisplayIcon: "D:\\software\\Microsoft VS Code\\Code.exe",
+      UninstallString: "\"D:\\software\\Microsoft VS Code\\unins000.exe\"",
+      InstallDate: "20230709",
+      URLInfoAbout: "https://code.visualstudio.com/"
+    }
   }
 ]
 ```
 
-# 🤔 原理
+## Linux
+
+```ts
+[
+  {
+    appName: "fail2ban",
+    appIdentifier: "fail2ban",
+    appVersion: "1.0.2-2",
+    installPath: null,
+    platform: "Linux",
+    method: "dpkg",
+    metadata: {
+      packageId: "fail2ban",
+      version: "1.0.2-2",
+      architecture: "all",
+      maintainer: "Debian Python Team <team+python@tracker.debian.org>",
+      section: "net",
+      description: "ban hosts that cause multiple authentication errors",
+      installed_size: 2180096,
+      is_system_package: 0,
+      is_auto_installed: 0
+    }
+  }
+]
+```
+
+# 🤔 工作原理
 
 - macOS
-  通过获取 Applications 文件夹下所有的文件，然后通过 mdls 获取文件的属性，然后解析相应的信息，形成结构的 app 信息的对象。
+  检索 'Applications' 下的软件文件目录。使用 'mdls' 获取软件文件的相关信息，然后提取相应的信息。如果 'mdls' 失败，则回退到 'plutil'。
 
 - Windows
-  主要是读取注册表的数据，然后解析相应的信息，形成结构的 app 信息的对象。
+  通过读取注册表中的数据来检索软件信息。
 
 - Linux
   通过查询 DPKG、APT、SNAP 和 Flatpak 中列出的条目来检索软件信息。
 
-# 🛠 本地开发
+# 🛠 开发
 
-```
-git clone https://github.com/jbrink90/get-installed-apps.git
-
+```bash
+git clone https://github.com/grayhatdevelopers/node-get-installed-apps.git
 cd get-installed-apps
-
 npm i
-
 npm start
-
 ```
 
 # 🙏 特别感谢
 
-感谢 <a href="https://github.com/Xutaotaotao/">Xutaotaotao</a> 启动了这个项目。
-<br/>
-<a href="https://github.com/Xutaotaotao/get-installed-apps">[原始分支]</a>
+感谢：
+
+- <a href="https://github.com/Xutaotaotao/">Xutaotaotao</a> 启动了这个项目。
+<br/> <a href="https://github.com/Xutaotaotao/get-installed-apps">[原始分支]</a>
+
+- [jbrink90](https://github.com/jbrink90) 提供的 Linux 支持
