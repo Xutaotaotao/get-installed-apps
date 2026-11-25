@@ -1,35 +1,32 @@
 <div align="center">
   <p>
-    <img src="https://img.shields.io/badge/version-1.1.0-blue.svg" alt="Version 1.1.0"/>
-    <a href="https://github.com/Xutaotaotao/get-installed-apps/actions/workflows/main.yml"><img src="https://github.com/Xutaotaotao/get-installed-apps/actions/workflows/main.yml/badge.svg" alt="build status"></a>
+    <img src="https://img.shields.io/badge/version-1.1.0-blue.svg" alt="Version 1.2.1"/>
+    <!-- <a href="https://github.com/jbrink90/get-installed-apps/actions/workflows/main.yml"><img src="https://github.com/jbrink90/get-installed-apps/actions/workflows/main.yml/badge.svg" alt="build status"></a> -->
     <img src="https://img.shields.io/npm/dt/get-installed-apps" alt="downloads" />
     <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="MIT License"/>
-    <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS-lightgrey.svg" alt="Platform: Windows | macOS"/>
+    <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-success.svg" alt="Platform: Windows | macOS | Linux"/>
   </p>
 </div>
 <div align="center">
 
-  简体中文 | [English](https://github.com/Xutaotaotao/get-installed-apps/blob/master/README.md)
-  
+简体中文 | [English](https://github.com/jbrink90/get-installed-apps/blob/master/README.md)
+
 </div>
 
+# Get Installed Apps (Linux 支持/发布)
 
-
-# Get Insatlled Apps
-
-通过Node.js 获取电脑安装的软件，支持Windows和Mac两个平台。
-
-MCP：https://github.com/Xutaotaotao/mcp-get-installed-apps
+该工具使用 Node.js 获取计算机上已安装的软件列表，并支持 Windows、Linux 和 Mac 平台。
 
 # 👨‍💻 安装
 
-`npm install get-installed-apps`
+`npm install get-installed-apps-linux`
 
 # 🔌 用法
-ES6 Module 
+
+ES6 Module
 
 ```
-import {getInstalledApps} from 'get-installed-apps'
+import {getInstalledApps} from 'get-installed-apps-linux'
 
 getInstalledApps().then(apps => {
   console.log(apps)
@@ -39,38 +36,49 @@ getInstalledApps().then(apps => {
 CommonJS
 
 ```
-const {getInstalledApps} = require('get-installed-apps')
+const {getInstalledApps} = require('get-installed-apps-linux')
 getInstalledApps().then(apps => {
   console.log(apps)
 })
 ```
 
-如果你只想在mac平台上使用，可以这么做：
+如果你只想在 mac 平台上使用，可以这么做：
 
 ```
-import {getMacInstalledApps} from 'get-installed-apps'
+import {getMacInstalledApps} from 'get-installed-apps-linux'
 
 getMacInstalledApps().then(apps => {
   console.log(apps)
 })
 ```
-`getMacInstalledApps` 有一个可选参数directory, 默认是'/Applications',你如果还需要获取其他目录的app,可以自己设置。
 
-如果你只想在windows平台上使用，可以这么做：
+`getMacInstalledApps` 有一个可选参数 directory, 默认是'/Applications',你如果还需要获取其他目录的 app,可以自己设置。
 
+如果你只想在 windows 平台上使用，可以这么做：
 
 ```
-import {getWinInstalledApps} from 'get-installed-apps'
+import {getWinInstalledApps} from 'get-installed-apps-linux'
 
 getWinInstalledApps().then(apps => {
   console.log(apps)
 })
 ```
+
+对于特定于 Linux 的方法
+
+```
+import {getLinuxInstalledApps} from 'get-installed-apps-linux'
+
+getLinuxInstalledApps().then(apps => {
+  console.log(apps)
+})
+```
+
 # ✅ 输出
 
 返回一个数组。
 
-下面是一个vscode的软件信息返回值， appName, appIdentifier, appInstallDate, appVersion这四个值是新的属性，主要保证双端统一。
+下面是一个 vscode 的软件信息返回值， appName, appIdentifier, appInstallDate, appVersion 这四个值是新的属性，主要保证双端统一。
 
 - macOS
 
@@ -113,7 +121,9 @@ getWinInstalledApps().then(apps => {
     appVersion: '1.79.0'
   }],
 ```
+
 - Windows
+
 ```
 [
   {
@@ -150,22 +160,45 @@ getWinInstalledApps().then(apps => {
   }
 ]
 ```
+
+- Linux
+
+```
+[
+  {
+    name: 'fail2ban',
+    packageId: 'fail2ban',
+    version: '1.0.2-2',
+    type: 'dpkg',
+    architecture: 'all',
+    maintainer: 'Debian Python Team <team+python@tracker.debian.org>',
+    section: 'net',
+    description: 'ban hosts that cause multiple authentication errors',
+    installed_size: 2180096,
+    repository: null,
+    license: null,
+    install_date: null,
+    is_system_package: 0,
+    is_auto_installed: 0
+  }
+]
+```
+
 # 🤔 原理
+
 - macOS
-通过获取Applications文件夹下所有的文件，然后通过mdls获取文件的属性，然后解析相应的信息，形成结构的app信息的对象。
+  通过获取 Applications 文件夹下所有的文件，然后通过 mdls 获取文件的属性，然后解析相应的信息，形成结构的 app 信息的对象。
 
 - Windows
-主要是读取注册表的数据，然后解析相应的信息，形成结构的app信息的对象。
+  主要是读取注册表的数据，然后解析相应的信息，形成结构的 app 信息的对象。
 
-# 📱 联系作者
-
-微信扫码联系我
-
-<img src="https://xutaotaotao.github.io/wx_qr.jpeg" width="200"/>
+- Linux
+  通过查询 DPKG、APT、SNAP 和 Flatpak 中列出的条目来检索软件信息。
 
 # 🛠 本地开发
+
 ```
-git clone https://github.com/Xutaotaotao/get-installed-apps.git
+git clone https://github.com/jbrink90/get-installed-apps.git
 
 cd get-installed-apps
 
@@ -174,3 +207,9 @@ npm i
 npm start
 
 ```
+
+# 🙏 特别感谢
+
+感谢 <a href="https://github.com/Xutaotaotao/">Xutaotaotao</a> 启动了这个项目。
+<br/>
+<a href="https://github.com/Xutaotaotao/get-installed-apps">[原始分支]</a>

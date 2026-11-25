@@ -1,22 +1,20 @@
-import {getInstalledApps as macGetInstalledApps} from './mac'
-import {getInstalledApps as winGetInstalledApps} from './win'
+import { getInstalledApps as getMacApps } from './mac';
+import { getInstalledApps as getWinApps } from './win';
+import { getInstalledApps as getLinuxApps } from './linux';
 
-export function getInstalledApps() {
-  if (process.platform === 'darwin') {
-    return macGetInstalledApps("/Applications")
-  } else if (process.platform === 'win32') {
-    return winGetInstalledApps()
-  } else {
-    return new Promise((_resolve,reject) => {
-      reject('Platform not supported')
-    })
+export async function getInstalledApps() {
+  switch (process.platform) {
+    case 'darwin':
+      return getMacApps('/Applications');
+    case 'win32':
+      return getWinApps();
+    case 'linux':
+      return getLinuxApps();
+    default:
+      throw new Error(`Unsupported platform: ${process.platform}`);
   }
 }
 
-export function getMacInstalledApps (directory = "/Applications") {
-  return macGetInstalledApps(directory)
-}
-
-export function getWinInstalledApps () {
-  return winGetInstalledApps()
-}
+export const getMacInstalledApps = getMacApps;
+export const getWinInstalledApps = getWinApps;
+export const getLinuxInstalledApps = getLinuxApps;

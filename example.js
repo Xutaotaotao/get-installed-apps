@@ -1,5 +1,6 @@
-const { getInstalledApps } = require("./dist/index");
+import { getInstalledApps } from "./dist/index.js";
 
-getInstalledApps().then(apps => {
-    console.log(apps)
-})
+(async () => {
+  const apps = await getInstalledApps();
+  console.log(apps);
+})();

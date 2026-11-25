@@ -1,11 +1,14 @@
 {
-  "name": "get-installed-apps",
-  "version": "1.1.1",
-  "description": "Get installed app using Node.js, supporting Windows and macOS.",
-  "homepage": "https://github.com/Xutaotaotao/get-installed-apps.git",
+  "publishConfig": {
+    "access": "public"
+  },
+  "name": "get-installed-apps-linux",
+  "version": "1.2.1",
+  "description": "Get installed app using Node.js, supporting Windows, Linux, and macOS.",
+  "homepage": "https://github.com/jbrink90/get-installed-apps",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Xutaotaotao/get-installed-apps.git"
+    "url": "https://github.com/jbrink90/get-installed-apps.git"
   },
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -24,17 +27,17 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "example": "node example.js",
-    "dev": "npm run start && npm run example",
+    "dev": "node example.js",
     "trypublish": "npm publish || true"
   },
-  "author": "Xutaotaotao",
+  "author": "jbrink90",
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^4.3.5",
     "@types/node": "^20.3.3",
     "chai": "^4.3.7",
     "nyc": "^15.1.0",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5.1.6"
   },
   "dependencies": {

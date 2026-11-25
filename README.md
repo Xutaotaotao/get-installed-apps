@@ -1,35 +1,32 @@
 <div align="center">
   <p>
-    <img src="https://img.shields.io/badge/version-1.1.0-blue.svg" alt="Version 1.1.0"/>
-    <a href="https://github.com/Xutaotaotao/get-installed-apps/actions/workflows/main.yml"><img src="https://github.com/Xutaotaotao/get-installed-apps/actions/workflows/main.yml/badge.svg" alt="build status"></a>
+    <img src="https://img.shields.io/badge/version-1.1.0-blue.svg" alt="Version 1.2.1"/>
+    <!-- <a href="https://github.com/jbrink90/get-installed-apps/actions/workflows/main.yml"><img src="https://github.com/jbrink90/get-installed-apps/actions/workflows/main.yml/badge.svg" alt="build status"></a> -->
     <img src="https://img.shields.io/npm/dt/get-installed-apps" alt="downloads" />
     <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="MIT License"/>
-    <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS-lightgrey.svg" alt="Platform: Windows | macOS"/>
+    <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-success.svg" alt="Platform: Windows | macOS | Linux"/>
   </p>
 </div>
 <div align="center">
 
-  English | [简体中文](https://github.com/Xutaotaotao/get-installed-apps/blob/master/README-zh_CN.md)
-  
+English | [简体中文](https://github.com/jbrink90/get-installed-apps/blob/master/README-zh_CN.md)
+
 </div>
 
-# Get Insatlled Apps
+# Get Installed Apps (Linux support)
 
+Get installed apps and packages using Node.js. Supports Windows, macOS, and Linux.
 
-Get installed app using Node.js, supporting Windows and macOS. 
+# 👨‍💻 Installation
 
-MCP：https://github.com/Xutaotaotao/mcp-get-installed-apps
-
-# 👨‍💻 Install
-
-`npm install get-installed-apps`
+`npm install get-installed-apps-linux`
 
 # 🔌 Usage
 
-ES6 Module 
+ES6 Module
 
 ```
-import {getInstalledApps} from 'get-installed-apps'
+import {getInstalledApps} from 'get-installed-apps-linux'
 
 getInstalledApps().then(apps => {
   console.log(apps)
@@ -39,7 +36,7 @@ getInstalledApps().then(apps => {
 CommonJS
 
 ```
-const {getInstalledApps} = require('get-installed-apps')
+const {getInstalledApps} = require('get-installed-apps-linux')
 getInstalledApps().then(apps => {
   console.log(apps)
 })
@@ -47,32 +44,41 @@ getInstalledApps().then(apps => {
 
 If you want to use macOS-specific methods separately, you can do it like this.
 
-
 ```
-import {getMacInstalledApps} from 'get-installed-apps'
+import {getMacInstalledApps} from 'get-installed-apps-linux'
 
 getMacInstalledApps().then(apps => {
   console.log(apps)
 })
 ```
 
-`getMacInstalledApps` has a optional parameter directory, defalut is '/Applications',you can set it what you need.
+`getMacInstalledApps` has a optional parameter directory. The default is '/Applications', you can set it to what you need.
 
-If you want to use windows-specific methods separately, you can do it like this.
+If you want to use Windows-specific methods separately, you can do it like this.
 
 ```
-import {getWinInstalledApps} from 'get-installed-apps'
+import {getWinInstalledApps} from 'get-installed-apps-linux'
 
 getWinInstalledApps().then(apps => {
   console.log(apps)
 })
 ```
 
+And for Linux-specific methods:
+
+```
+import {getLinuxInstalledApps} from 'get-installed-apps-linux'
+
+getLinuxInstalledApps().then(apps => {
+  console.log(apps)
+})
+```
+
 # ✅ OUTPUT
 
-Return an array.
+Returns an array of applications or packages and their identifying attributes.
 
-This is the return value for Visual Studio Code,the properties appName, appIdentifier, appInstallDate, and appVersion are overridden.
+This is the return value for Visual Studio Code, the properties appName, appIdentifier, appInstallDate, and appVersion are overridden.
 
 - macOS
 
@@ -115,7 +121,9 @@ This is the return value for Visual Studio Code,the properties appName, appIdent
     appVersion: '1.79.0'
   }],
 ```
+
 - Windows
+
 ```
 [
   {
@@ -153,23 +161,42 @@ This is the return value for Visual Studio Code,the properties appName, appIdent
 ]
 ```
 
+- Linux
+
+```
+[
+  {
+    name: 'fail2ban',
+    packageId: 'fail2ban',
+    version: '1.0.2-2',
+    type: 'dpkg',
+    architecture: 'all',
+    maintainer: 'Debian Python Team <team+python@tracker.debian.org>',
+    section: 'net',
+    description: 'ban hosts that cause multiple authentication errors',
+    installed_size: 2180096,
+    repository: null,
+    license: null,
+    install_date: null,
+    is_system_package: 0,
+    is_auto_installed: 0
+  }
+]
+```
 
 # 🤔 How it works
 
 - macOS
-Retrieve the software file directory under 'Applications', use 'mdls' to fetch relevant information about the software files, and then extract the corresponding information.
+  Retrieves the software file directory under 'Applications'. Uses 'mdls' to fetch relevant information about the software files, and then extracts the corresponding information.
 - Windows
-Retrieve software information by reading data from the registry.
-
-# 📱 Contact me
-
-Use WeChat to contact me
-
-<img src="https://xutaotaotao.github.io/wx_qr.jpeg" width="200"/>
+  Retrieves software information by reading data from the registry.
+- Linux
+  Retrieves software information by querying entries listed in DPKG, APT, SNAP, and Flatpak.
 
 # 🛠 Development
+
 ```
-git clone https://github.com/Xutaotaotao/get-installed-apps.git
+git clone https://github.com/jbrink90/get-installed-apps.git
 
 cd get-installed-apps
 
@@ -178,3 +205,9 @@ npm i
 npm start
 
 ```
+
+# 🙏 Special Thanks
+
+Thank you to <a href="https://github.com/Xutaotaotao/">Xutaotaotao</a> for kicking off this project.
+<br/>
+<a href="https://github.com/Xutaotaotao/get-installed-apps">[Original branch]</a>
